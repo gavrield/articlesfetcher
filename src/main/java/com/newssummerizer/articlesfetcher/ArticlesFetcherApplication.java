@@ -2,12 +2,14 @@ package com.newssummerizer.articlesfetcher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-public class ArticlesfetcherApplication {
+@EnableMongoRepositories
+public class ArticlesFetcherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ArticlesfetcherApplication.class, args);
+		SpringApplication.run(ArticlesFetcherApplication.class, args);
 	}
 
 }
