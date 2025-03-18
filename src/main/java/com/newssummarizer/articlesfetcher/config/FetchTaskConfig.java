@@ -1,10 +1,10 @@
-package com.newssummerizer.articlesfetcher.config;
+package com.newssummarizer.articlesfetcher.config;
 
 import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.newssummerizer.articlesfetcher.mapper.ArticleMapper;
-import com.newssummerizer.articlesfetcher.repository.ArticlesRepository;
-import com.newssummerizer.articlesfetcher.repository.SequenceGeneratorService;
-import com.newssummerizer.articlesfetcher.task.FetchTask;
+import com.newssummarizer.articlesfetcher.mapper.ArticleMapper;
+import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
+import com.newssummarizer.articlesfetcher.repository.SequenceGeneratorService;
+import com.newssummarizer.articlesfetcher.task.FetchTask;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

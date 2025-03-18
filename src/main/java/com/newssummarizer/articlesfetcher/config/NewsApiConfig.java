@@ -1,4 +1,4 @@
-package com.newssummerizer.articlesfetcher.config;
+package com.newssummarizer.articlesfetcher.config;
 
 import com.kwabenaberko.newsapilib.NewsApiClient;
 import org.springframework.beans.factory.annotation.Value;

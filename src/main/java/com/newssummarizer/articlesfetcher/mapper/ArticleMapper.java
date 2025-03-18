@@ -1,8 +1,9 @@
-package com.newssummerizer.articlesfetcher.mapper;
+package com.newssummarizer.articlesfetcher.mapper;
 
 import com.kwabenaberko.newsapilib.models.Article;
-import com.newssummerizer.articlesfetcher.repository.ArticleEntity;
+import com.newssummarizer.articlesfetcher.repository.ArticleEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,5 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ArticleMapper {
 
+    @Mapping(target = "_id", ignore = true)
+    @Mapping(target = "summary", ignore = true)
     List<ArticleEntity> toArticleEntityList(List<Article> articles);
 }

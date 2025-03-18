@@ -1,4 +1,4 @@
-package com.newssummerizer.articlesfetcher;
+package com.newssummarizer.articlesfetcher;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

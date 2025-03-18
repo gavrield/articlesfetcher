@@ -1,17 +1,16 @@
-package com.newssummerizer.articlesfetcher.task;
+package com.newssummarizer.articlesfetcher.task;
 
 import com.kwabenaberko.newsapilib.NewsApiClient;
 import com.kwabenaberko.newsapilib.models.Article;
 import com.kwabenaberko.newsapilib.models.request.EverythingRequest;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
-import com.newssummerizer.articlesfetcher.mapper.ArticleMapper;
-import com.newssummerizer.articlesfetcher.repository.ArticleEntity;
-import com.newssummerizer.articlesfetcher.repository.ArticlesRepository;
-import com.newssummerizer.articlesfetcher.repository.SequenceGeneratorService;
+import com.newssummarizer.articlesfetcher.mapper.ArticleMapper;
+import com.newssummarizer.articlesfetcher.repository.ArticleEntity;
+import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
+import com.newssummarizer.articlesfetcher.repository.SequenceGeneratorService;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class FetchTask implements Runnable {

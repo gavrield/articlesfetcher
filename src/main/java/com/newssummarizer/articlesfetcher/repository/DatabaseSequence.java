@@ -1,4 +1,4 @@
-package com.newssummerizer.articlesfetcher.repository;
+package com.newssummarizer.articlesfetcher.repository;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

@@ -1,4 +1,4 @@
-package com.newssummerizer.articlesfetcher.repository;
+package com.newssummarizer.articlesfetcher.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,7 +18,8 @@ public class SequenceGeneratorService {
     private MongoTemplate mongoTemplate;
 
     public long generateSequence(String seqName) {
-        DatabaseSequence counter = mongoTemplate.findAndModify(query(where("_id").is(seqName)),
+        DatabaseSequence counter = mongoTemplate.findAndModify(
+                query(where("_id").is(seqName)),
                 new Update().inc("seq",1), options().returnNew(true).upsert(true),
                 DatabaseSequence.class);
         return !Objects.isNull(counter) ? counter.getSeq() : 1;

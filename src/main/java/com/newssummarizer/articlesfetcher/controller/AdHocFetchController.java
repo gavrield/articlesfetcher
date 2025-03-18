@@ -1,6 +1,6 @@
-package com.newssummerizer.articlesfetcher.controller;
+package com.newssummarizer.articlesfetcher.controller;
 
-import com.newssummerizer.articlesfetcher.service.AdHocFetchService;
+import com.newssummarizer.articlesfetcher.service.AdHocFetchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

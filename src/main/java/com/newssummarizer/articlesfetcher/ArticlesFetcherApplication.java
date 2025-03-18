@@ -1,4 +1,4 @@
-package com.newssummerizer.articlesfetcher;
+package com.newssummarizer.articlesfetcher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

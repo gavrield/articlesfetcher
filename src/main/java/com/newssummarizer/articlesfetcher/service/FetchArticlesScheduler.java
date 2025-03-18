@@ -1,7 +1,7 @@
-package com.newssummerizer.articlesfetcher.service;
+package com.newssummarizer.articlesfetcher.service;
 
-import com.newssummerizer.articlesfetcher.task.FetchTask;
-import com.newssummerizer.articlesfetcher.task.TasksCollection;
+import com.newssummarizer.articlesfetcher.task.FetchTask;
+import com.newssummarizer.articlesfetcher.task.TasksCollection;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -16,6 +16,8 @@ public class FetchArticlesScheduler {
     private TasksCollection tasksCollection;
     @Autowired
     private CronTrigger cronTrigger;
+    @Autowired
+    private SummarizeService summarizeService;
 
     @PostConstruct
     public void fetchArticlesAndStoreThem () {

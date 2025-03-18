@@ -1,12 +1,13 @@
-package com.newssummerizer.articlesfetcher.service;
+package com.newssummarizer.articlesfetcher.service;
 
 import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.newssummerizer.articlesfetcher.mapper.ArticleMapper;
-import com.newssummerizer.articlesfetcher.repository.ArticlesRepository;
-import com.newssummerizer.articlesfetcher.repository.SequenceGeneratorService;
-import com.newssummerizer.articlesfetcher.task.FetchTask;
+import com.newssummarizer.articlesfetcher.mapper.ArticleMapper;
+import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
+import com.newssummarizer.articlesfetcher.repository.SequenceGeneratorService;
+import com.newssummarizer.articlesfetcher.task.FetchTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDate;
 
@@ -21,6 +22,8 @@ public class AdHocFetchService {
     private ArticleMapper mapper;
     @Autowired
     SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private SummarizeService summarizeService;
 
     public void fetch(String query) {
         FetchTask task = new FetchTask(

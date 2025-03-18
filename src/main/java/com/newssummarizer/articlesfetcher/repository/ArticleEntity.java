@@ -1,13 +1,15 @@
-package com.newssummerizer.articlesfetcher.repository;
+package com.newssummarizer.articlesfetcher.repository;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
 
 @Document(collection = "articles")
+@TypeAlias("article")
 @Data
 public class ArticleEntity {
 
@@ -20,5 +22,5 @@ public class ArticleEntity {
     private String author;
     private String publishedAt;
     private String url;
-    private String summery;
+    private String summary;
 }
