@@ -18,6 +18,7 @@ public class ArticleEntity {
 
     @Id
     private BigInteger _id;
+    private String query;
     private String title;
     private String author;
     private String publishedAt;

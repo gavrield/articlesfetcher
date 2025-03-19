@@ -43,9 +43,11 @@ public class FetchTask implements Runnable {
                     public void onSuccess(ArticleResponse articleResponse) {
                         List<Article> articles = articleResponse.getArticles();
                         List<ArticleEntity> articleEntities = mapper.toArticleEntityList(articles);
-                        articleEntities.forEach(articleEntity ->
-                                articleEntity.set_id(BigInteger.valueOf(
-                                        sequenceGeneratorService.generateSequence(ArticleEntity.SEQUENCE_NAME))));
+                        articleEntities.forEach(articleEntity -> {
+                            articleEntity.set_id(BigInteger.valueOf(
+                                    sequenceGeneratorService.generateSequence(ArticleEntity.SEQUENCE_NAME)));
+                            articleEntity.setQuery(query);
+                        });
                         for (ArticleEntity articleEntity: articleEntities) {
                             repository.insert(articleEntity);
                         }
@@ -53,7 +55,7 @@ public class FetchTask implements Runnable {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
+                        throw new RuntimeException(throwable);
                     }
                 }
         );

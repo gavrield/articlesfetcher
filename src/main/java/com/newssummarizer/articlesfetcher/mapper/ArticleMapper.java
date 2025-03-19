@@ -14,5 +14,6 @@ public interface ArticleMapper {
 
     @Mapping(target = "_id", ignore = true)
     @Mapping(target = "summary", ignore = true)
+    @Mapping(target = "query", ignore = true)
     List<ArticleEntity> toArticleEntityList(List<Article> articles);
 }

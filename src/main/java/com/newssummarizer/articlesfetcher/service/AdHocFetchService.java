@@ -22,8 +22,6 @@ public class AdHocFetchService {
     private ArticleMapper mapper;
     @Autowired
     SequenceGeneratorService sequenceGeneratorService;
-    @Autowired
-    private SummarizeService summarizeService;
 
     public void fetch(String query) {
         FetchTask task = new FetchTask(

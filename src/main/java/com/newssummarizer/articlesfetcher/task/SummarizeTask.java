@@ -1,24 +1,26 @@
 package com.newssummarizer.articlesfetcher.task;
 
-import com.google.genai.Client;
+import com.google.genai.Models;
 import com.google.genai.types.GenerateContentResponse;
 import com.newssummarizer.articlesfetcher.repository.ArticleEntity;
 import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
+import lombok.Setter;
 import org.apache.http.HttpException;
 
 import java.io.IOException;
 import java.util.List;
 
-public class SummarizeTask implements Runnable{
+@Setter
+public class SummarizeTask implements Runnable {
 
-    private Client geminiClient;
+    private Models geminiModels;
     private ArticlesRepository repository;
 
     private final String geminiModel = "gemini-2.0-flash-001";
     private final String baseQuery = "Can you summarize this article ";
 
-    public SummarizeTask(Client geminiClient,ArticlesRepository repository) {
-        this.geminiClient = geminiClient;
+    public SummarizeTask(Models models,ArticlesRepository repository) {
+        this.geminiModels = models;
         this.repository = repository;
     }
 
@@ -27,14 +29,12 @@ public class SummarizeTask implements Runnable{
         List<ArticleEntity> articleEntities = repository.findByFieldNotExists("summary");
         for (ArticleEntity entity: articleEntities) {
             try {
-                GenerateContentResponse response = geminiClient.models.generateContent(
+                GenerateContentResponse response = geminiModels.generateContent(
                         geminiModel,
                         baseQuery + entity.getUrl(),
                         null);
                 entity.setSummary(response.text());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (HttpException e) {
+            } catch (IOException | HttpException e) {
                 throw new RuntimeException(e);
             } finally {
                 repository.saveAll(articleEntities);
