@@ -12,4 +12,11 @@ public interface ArticlesRepository extends MongoRepository<ArticleEntity, BigIn
 
     @Query("{ ?0 : { $exists: false } }")
     List<ArticleEntity> findByFieldNotExists(String fieldName);
+
+    default List<ArticleEntity> findByMissingField(String fieldName) {
+        if (!RepositoryConst.VALID_ARTICLE_ENTITY_FIELDS.contains(fieldName)) {
+            throw new IllegalArgumentException("Not valid field name");
+        }
+        return findByFieldNotExists(fieldName);
+    }
 }

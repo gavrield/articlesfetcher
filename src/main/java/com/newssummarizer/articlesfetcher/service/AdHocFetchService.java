@@ -5,23 +5,25 @@ import com.newssummarizer.articlesfetcher.mapper.ArticleMapper;
 import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
 import com.newssummarizer.articlesfetcher.repository.SequenceGeneratorService;
 import com.newssummarizer.articlesfetcher.task.FetchTask;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
+import java.util.concurrent.CompletableFuture;
 
 @Service
+@RequiredArgsConstructor
 public class AdHocFetchService {
 
-    @Autowired
-    private ArticlesRepository repository;
-    @Autowired
-    private NewsApiClient client;
-    @Autowired
-    private ArticleMapper mapper;
-    @Autowired
-    SequenceGeneratorService sequenceGeneratorService;
+
+    private final ArticlesRepository repository;
+
+    private final NewsApiClient client;
+
+    private final ArticleMapper mapper;
+
+    private final SequenceGeneratorService sequenceGeneratorService;
 
     public void fetch(String query) {
         FetchTask task = new FetchTask(
@@ -32,6 +34,6 @@ public class AdHocFetchService {
                 mapper,
                 sequenceGeneratorService
         );
-        task.run();
+        CompletableFuture.runAsync(task);
     }
 }

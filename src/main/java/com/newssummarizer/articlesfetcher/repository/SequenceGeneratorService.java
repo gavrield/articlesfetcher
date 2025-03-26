@@ -1,6 +1,6 @@
 package com.newssummarizer.articlesfetcher.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Service
+@RequiredArgsConstructor
 public class SequenceGeneratorService {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
     public long generateSequence(String seqName) {
         DatabaseSequence counter = mongoTemplate.findAndModify(

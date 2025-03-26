@@ -2,7 +2,6 @@ package com.newssummarizer.articlesfetcher.repository;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,9 +11,6 @@ import java.math.BigInteger;
 @TypeAlias("article")
 @Data
 public class ArticleEntity {
-
-    @Transient
-    public static final String SEQUENCE_NAME = "articles_sequence";
 
     @Id
     private BigInteger _id;

@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class SummarizeTaskTest {
 
+    private final String SUMMARY_FIELD_NAME = "summary";
     @Mock
     private Models geminiModels;
 
@@ -43,7 +44,7 @@ class SummarizeTaskTest {
 
         List<ArticleEntity> articles = Arrays.asList(article1, article2);
 
-        when(repository.findByFieldNotExists("summary")).thenReturn(articles);
+        when(repository.findByMissingField(SUMMARY_FIELD_NAME)).thenReturn(articles);
 
         GenerateContentResponse response1 = GenerateContentResponse.builder()
                 .candidates(List.of(Candidate.builder()
@@ -74,7 +75,7 @@ class SummarizeTaskTest {
         summarizeTask.run();
 
         // Assert
-        verify(repository, times(1)).findByFieldNotExists("summary");
+        verify(repository, times(1)).findByMissingField(SUMMARY_FIELD_NAME);
         verify(geminiModels, times(1)).generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article1"), isNull());
         verify(geminiModels, times(1)).generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article2"), isNull());
         verify(repository, times(2)).saveAll(articles);
@@ -91,14 +92,14 @@ class SummarizeTaskTest {
 
         List<ArticleEntity> articles = Arrays.asList(article);
 
-        when(repository.findByFieldNotExists("summary")).thenReturn(articles);
+        when(repository.findByMissingField(SUMMARY_FIELD_NAME)).thenReturn(articles);
         when(geminiModels.generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article"), isNull()))
                 .thenThrow(new IOException("Network error"));
 
         // Act & Assert
         assertThrows(RuntimeException.class, () -> summarizeTask.run());
 
-        verify(repository, times(1)).findByFieldNotExists("summary");
+        verify(repository, times(1)).findByMissingField(SUMMARY_FIELD_NAME);
         verify(geminiModels, times(1)).generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article"), isNull());
     }
 
@@ -110,14 +111,14 @@ class SummarizeTaskTest {
 
         List<ArticleEntity> articles = Arrays.asList(article);
 
-        when(repository.findByFieldNotExists("summary")).thenReturn(articles);
+        when(repository.findByMissingField(SUMMARY_FIELD_NAME)).thenReturn(articles);
         when(geminiModels.generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article"), isNull()))
                 .thenThrow(new HttpException("HTTP error"));
 
         // Act & Assert
         assertThrows(RuntimeException.class, () -> summarizeTask.run());
 
-        verify(repository, times(1)).findByFieldNotExists("summary");
+        verify(repository, times(1)).findByMissingField(SUMMARY_FIELD_NAME);
         verify(geminiModels, times(1)).generateContent(eq("gemini-2.0-flash-001"), eq("Can you summarize this article http://example.com/article"), isNull());
     }
 }

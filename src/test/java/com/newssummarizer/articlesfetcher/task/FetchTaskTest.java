@@ -7,6 +7,7 @@ import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import com.newssummarizer.articlesfetcher.mapper.ArticleMapper;
 import com.newssummarizer.articlesfetcher.repository.ArticleEntity;
 import com.newssummarizer.articlesfetcher.repository.ArticlesRepository;
+import com.newssummarizer.articlesfetcher.repository.RepositoryConst;
 import com.newssummarizer.articlesfetcher.repository.SequenceGeneratorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -86,7 +87,7 @@ class FetchTaskTest {
 
         // Verify that the mapper and repository methods were called
         verify(mapper).toArticleEntityList(Collections.singletonList(mockArticle));
-        verify(sequenceGeneratorService).generateSequence(ArticleEntity.SEQUENCE_NAME);
+        verify(sequenceGeneratorService).generateSequence(RepositoryConst.SEQUENCE_NAME);
         verify(repository).insert(mockArticleEntity);
     }
 
